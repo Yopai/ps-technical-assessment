@@ -1,0 +1,14 @@
+version: '3'
+services:
+    php:
+        image: php:8.1.2-fpm
+        volumes:
+            - ./:/src
+    nginx:
+        build: ./docker/nginx
+        volumes:
+            - ./:/usr/nginx/html
+        ports:
+            - 9443:443
+        links:
+            - php
