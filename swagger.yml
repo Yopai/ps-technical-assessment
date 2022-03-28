@@ -1,0 +1,78 @@
+# https://app.swaggerhub.com/apis/Yopai/PeopleSpheres/1.0.0
+swagger: '2.0'
+host: peoplespheres.localhost:9443
+info:
+    description: This is an API to answer the « Backend Software Developer Technical Assessment – v22-02 » sent the March 14th, 2022.
+    version: 1.0.0
+    title: PeopleSpheres Technical Assesment
+    contact:
+        name: Pierre-Olivier Vares
+        email: pierre.olivier.vares@free.fr
+
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+    /api/v1/generate-email:
+        post:
+            summary: Generate email
+            operationId: generateEmail
+            consumes:
+                - application/x-www-form-urlencoded
+            description: |
+                Generate an email based on the given expression, with the given inputs
+            produces:
+                - application/vnd.api+json
+            parameters:
+                - in: formData
+                  name: input1
+                  description: The first input used in the expression evaluation. In fact, you can pass any number of parameters you wish, with any name.
+                  required: false
+                  type: string
+                  sample: "Jean-Louis"
+                - in: formData
+                  name: input2
+                  description: The second input used in the expression evaluation.
+                  required: false
+                  type: string
+                  sample: "Jean-Charles Mignard"
+                - in: formData
+                  name: input3
+                  required: false
+                  type: string
+                  sample: "external"
+                - in: formData
+                  name: input4
+                  required: false
+                  type: string
+                  sample: "peoplespheres.fr"
+                - in: formData
+                  name: input5
+                  required: false
+                  type: string
+                  sample: "fr"
+                - in: formData
+                  name: expression
+                  description: The expression to evaluate. See the dedicated language for that.
+                  required: false
+                  type: string
+            responses:
+                200:
+                    description: "Email generated with the given expression and inputs"
+                    content:
+                        application/vnd.api+json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: string
+                                                example: jl.jccharlesmignard@external.peoplespheres.fr
+                                            value:
+                                                type: string
+                                                example: jl.jccharlesmignard@external.peoplespheres.fr
+                default:
+                    description: Unexpected error
